@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أدوار الغبقة الرمضانية</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="loginSection" class="section active">
+            <h1>🌙 غبقة الموظفين ✨</h1>
+            <p>أدخل رقمك الشخصي للدخول</p>
+            <input type="text" id="empId" placeholder="الرقم الشخصي..." required>
+            <button onclick="login()">دخول</button>
+            <p id="loginError" class="error"></p>
+        </div>
+
+        <div id="wheelSection" class="section hidden">
+            <h2 id="welcomeMsg"></h2>
+            <p>لديك 3 محاولات لتدوير العجلة وجمع خياراتك!</p>
+            
+            <div class="wheel-container">
+                <canvas id="wheelCanvas" width="300" height="300"></canvas>
+                <div class="wheel-pointer">▼</div>
+            </div>
+            
+            <button id="spinBtn" onclick="spinWheel()">دُر العجلة (<span id="spinsLeft">3</span> متبقية)</button>
+            
+            <div id="spunOptionsArea" class="hidden mt-20">
+                <h3>خياراتك حتى الآن:</h3>
+                <ul id="spunList"></ul>
+                <button id="proceedBtn" class="secondary-btn hidden" onclick="showSelection()">اختر دورك النهائي</button>
+            </div>
+        </div>
+
+        <div id="selectionSection" class="section hidden">
+            <h2>🎉 مبروك! لقد حصلت على هذه الخيارات</h2>
+            <p>اختر دوراً واحداً فقط من القائمة ليكون دورك الرسمي في الغبقة:</p>
+            <div id="optionsContainer" class="options-grid"></div>
+        </div>
+
+        <div id="resultSection" class="section hidden">
+            <h2>تم اعتماد دورك بنجاح! 🎊</h2>
+            <h1 id="finalRoleName" class="gold-text"></h1>
+            <div class="role-card">
+                <h3>مهمتك:</h3>
+                <p id="finalRoleDesc"></p>
+            </div>
+            <p class="coordinator-note">📞 يرجى التواصل مع مسؤول الفعالية لمزيد من التنسيق والترتيب.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
