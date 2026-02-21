@@ -151,29 +151,38 @@ function spinWheel() {
 }
 
 // 4. عرض شاشة الاختيار النهائي
-function showSelection() {
+async function showSelection() {
     const container = document.getElementById('optionsContainer');
+    container.innerHTML = "<p>جاري التحقق من الأدوار... ⏳</p>";
+    showSection('selectionSection');
+
+    // تحقق من الأدوار المتاحة الآن
+    const formData = new URLSearchParams({ action: "login", empId: currentEmployeeId });
+    const res = await fetch(SCRIPT_URL, { method: 'POST', body: formData });
+    const data = await res.json();
+
+    // فلترة الخيارات اللي ما زالت متاحة
+    const stillAvailable = spunRoles.filter(role => 
+        data.availableRoles.includes(role) || role === "ضيف شرف"
+    );
+
     container.innerHTML = "";
 
-    // ✅ لو دور واحد فقط، اختاره مباشرة
-    if (spunRoles.length === 1) {
-        saveFinalRole(spunRoles[0]);
+    if (stillAvailable.length === 0) {
+        container.innerHTML = "<p class='error'>عذراً، جميع أدوارك اكتملت! يرجى تحديث الصفحة.</p>";
         return;
     }
 
-    spunRoles.forEach(role => {
+    stillAvailable.forEach(role => {
         const div = document.createElement('div');
         div.className = "option-card";
         div.innerText = role;
         div.onclick = () => {
-            // ✅ منع الضغط المزدوج
             document.querySelectorAll('.option-card').forEach(c => c.onclick = null);
             saveFinalRole(role);
         };
         container.appendChild(div);
     });
-
-    showSection('selectionSection');
 }
 
 // 5. حفظ الدور في Google Sheets
