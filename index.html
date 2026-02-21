@@ -5,53 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أدوار الغبقة الرمضانية</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+
+        <!-- شاشة الدخول -->
         <div id="loginSection" class="section active">
-            <h1>🌙 غبقة الموظفين ✨</h1>
-            <p>أدخل رقمك الشخصي للدخول</p>
+            <div class="moon-icon">🌙</div>
+            <h1>غبقة الموظفين</h1>
+            <p class="subtitle">أدخل رقمك الشخصي للدخول واكتشف دورك</p>
             <input type="text" id="empId" placeholder="الرقم الشخصي..." required>
-            <button onclick="login()">دخول</button>
+            <button onclick="login()">دخول ✨</button>
             <p id="loginError" class="error"></p>
         </div>
 
+        <!-- شاشة العجلة -->
         <div id="wheelSection" class="section hidden">
             <h2 id="welcomeMsg"></h2>
-            <p>لديك 3 محاولات لتدوير العجلة وجمع خياراتك!</p>
-            
+            <p class="subtitle">لديك <strong>3 محاولات</strong> لتدوير العجلة وجمع خياراتك!</p>
+
             <div class="wheel-container">
-                <canvas id="wheelCanvas" width="300" height="300"></canvas>
                 <div class="wheel-pointer">▼</div>
+                <canvas id="wheelCanvas" width="300" height="300"></canvas>
             </div>
-            
-            <button id="spinBtn" onclick="spinWheel()">دُر العجلة (<span id="spinsLeft">3</span> متبقية)</button>
-            
+
+            <button id="spinBtn" onclick="spinWheel()">
+                🎯 دُر العجلة &nbsp;|&nbsp; <span id="spinsLeft">3</span> متبقية
+            </button>
+
             <div id="spunOptionsArea" class="hidden mt-20">
-                <h3>خياراتك حتى الآن:</h3>
+                <h3>⭐ خياراتك حتى الآن:</h3>
                 <ul id="spunList"></ul>
-                <button id="proceedBtn" class="secondary-btn hidden" onclick="showSelection()">اختر دورك النهائي</button>
+                <button id="proceedBtn" class="secondary-btn hidden" onclick="showSelection()">
+                    اختر دورك النهائي ←
+                </button>
             </div>
         </div>
 
+        <!-- شاشة الاختيار النهائي -->
         <div id="selectionSection" class="section hidden">
-            <h2>🎉 مبروك! لقد حصلت على هذه الخيارات</h2>
-            <p>اختر دوراً واحداً فقط من القائمة ليكون دورك الرسمي في الغبقة:</p>
+            <h2>🎉 مبروك!</h2>
+            <p class="subtitle">اختر دوراً واحداً فقط ليكون دورك الرسمي في الغبقة:</p>
             <div id="optionsContainer" class="options-grid"></div>
         </div>
 
+        <!-- شاشة النتيجة -->
         <div id="resultSection" class="section hidden">
-            <h2>تم اعتماد دورك بنجاح! 🎊</h2>
+            <div class="success-icon">🎊</div>
+            <h2>تم اعتماد دورك بنجاح!</h2>
             <h1 id="finalRoleName" class="gold-text"></h1>
             <div class="role-card">
-                <h3>مهمتك:</h3>
+                <h3>📋 مهمتك:</h3>
                 <p id="finalRoleDesc"></p>
             </div>
-            <p class="coordinator-note">📞 يرجى التواصل مع مسؤول الفعالية لمزيد من التنسيق والترتيب.</p>
+            <p class="coordinator-note" style="display:none;">
+                📞 يرجى التواصل مع مسؤول الفعالية لمزيد من التنسيق والترتيب.
+            </p>
         </div>
-    </div>
 
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
